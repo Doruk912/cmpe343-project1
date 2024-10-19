@@ -230,7 +230,7 @@ public class CMPE343Project1 {
     }
 
     /**
-     * Main function for statistical information of an array
+     * Statistical information of an array
      */
     public static void A() {
         ClearScreen();
@@ -348,7 +348,7 @@ public class CMPE343Project1 {
     }
 
     /**
-     * Main function for the tic-tac-toe game
+     * Tic-tac-toe game
      */
     public static void D() {
         char[][] table = new char[3][3];
