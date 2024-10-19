@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class CMPE343Project1 {
     private static final Scanner scanner = new Scanner(System.in);
@@ -156,8 +157,7 @@ public class CMPE343Project1 {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             else
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
-        }
-        catch (IOException | InterruptedException ex) {
+        } catch (IOException | InterruptedException ex) {
             System.out.println("Error while clearing screen");
         }
     }
@@ -166,8 +166,7 @@ public class CMPE343Project1 {
         System.out.println("\nPress ENTER to return to main menu");
         try {
             System.in.read();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Error");
         }
         ClearScreen();
@@ -178,8 +177,7 @@ public class CMPE343Project1 {
             try {
                 System.out.print(prompt);
                 return new Scanner(System.in).nextInt();
-            }
-            catch (InputMismatchException ex) {
+            } catch (InputMismatchException ex) {
                 System.out.println("Wrong data type, try again");
             }
         }
@@ -190,8 +188,7 @@ public class CMPE343Project1 {
             try {
                 System.out.print(prompt);
                 return new Scanner(System.in).nextDouble();
-            }
-            catch (InputMismatchException ex) {
+            } catch (InputMismatchException ex) {
                 System.out.println("Wrong data type, try again");
             }
         }
@@ -219,6 +216,8 @@ public class CMPE343Project1 {
             geometric *= arr[i];
         }
 
+        Arrays.sort(arr);
+
         double median = (size % 2 == 0) ? (arr[size / 2] + arr[size / 2 - 1]) / 2.0 : arr[size / 2];
         arithmetic /= size;
         geometric = Math.pow(geometric, 1.0 / size);
@@ -232,7 +231,9 @@ public class CMPE343Project1 {
 
     public static void PrintTable(char[][] table) {
         System.out.println();
+        System.out.println("  1 2 3");
         for (int i = 0; i < 3; i++) {
+            System.out.print((i + 1) + " ");
             for (int j = 0; j < 3; j++)
                 System.out.print(table[i][j] + " ");
             System.out.println();
@@ -288,8 +289,7 @@ public class CMPE343Project1 {
 
                 table[y][x] = turn ? 'X' : 'O';
                 break;
-            }
-            catch (StringIndexOutOfBoundsException ex) {
+            } catch (StringIndexOutOfBoundsException ex) {
                 System.out.println("Unknown move");
             }
         }
@@ -315,8 +315,7 @@ public class CMPE343Project1 {
                 System.out.println("X wins");
                 ReturnToMenu();
                 return;
-            }
-            else if (CheckWinner(table) == 'O') {
+            } else if (CheckWinner(table) == 'O') {
                 ClearScreen();
                 PrintTable(table);
                 System.out.println("O wins");
