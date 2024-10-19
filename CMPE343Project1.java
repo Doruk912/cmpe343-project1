@@ -3,9 +3,16 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
 
+/**
+ * Main class for Project 1
+ */
 public class CMPE343Project1 {
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Main function which prints the ASCII art and waits for an input from the user
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         System.out.println(
                 """
@@ -71,6 +78,9 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Displays the menu for text encryption and decryption
+     */
     public static void textEncryptionDecryptionMenu(){
         clearConsole();
         String input;
@@ -99,6 +109,9 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Encrypts text
+     */
     public static void textEncryption(){
         System.out.println("Enter Key: ");
         int key = Integer.valueOf(scanner.nextLine());
@@ -122,6 +135,9 @@ public class CMPE343Project1 {
         System.out.println("Encrypted Message: " + encryptedMessage  + "\n");
     }
 
+    /**
+     * Decrypts text
+     */
     public static void textDecryption(){
         System.out.println("Enter Key: ");
         int key = Integer.valueOf(scanner.nextLine());
@@ -145,12 +161,18 @@ public class CMPE343Project1 {
         System.out.println("Decrypted Message: " + decryptedMessage + "\n");
     }
 
+    /**
+     * Clears console with printing new line
+     */
     public static void clearConsole() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
     }
 
+    /**
+     * Clears the console by running the relevant command for the detected operating system
+     */
     public static void ClearScreen() {
         try {
             if (System.getProperty("os.name").contains("Windows"))
@@ -162,6 +184,9 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Waits ENTER key from the user and clears the screen which prepares fresh start for the main loop
+     */
     public static void ReturnToMenu() {
         System.out.println("\nPress ENTER to return to main menu");
         try {
@@ -172,6 +197,11 @@ public class CMPE343Project1 {
         ClearScreen();
     }
 
+    /**
+     * Prompts integer input until no errors are encountered
+     * @param prompt Prompt which is going to be printed on the screen
+     * @return Integer value from the user
+     */
     public static int SafeIntInput(String prompt) {
         while (true) {
             try {
@@ -183,6 +213,11 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Prompts double input until no errors are encountered
+     * @param prompt Prompt which is going to be printed on the screen
+     * @return Double value from the user
+     */
     public static double SafeDoubleInput(String prompt) {
         while (true) {
             try {
@@ -194,6 +229,9 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Main function for statistical information of an array
+     */
     public static void A() {
         ClearScreen();
         System.out.println("Selected option: A\n");
@@ -222,13 +260,17 @@ public class CMPE343Project1 {
         arithmetic /= size;
         geometric = Math.pow(geometric, 1.0 / size);
 
-        System.out.println("Median: " + median);
+        System.out.println("\nMedian: " + median);
         System.out.println("Arithmetic Mean: " + arithmetic);
         System.out.println("Geometric Mean: " + geometric);
 
         ReturnToMenu();
     }
 
+    /**
+     * Print tic-tac-toe game board
+     * @param table Tic-tac-toe game board
+     */
     public static void PrintTable(char[][] table) {
         System.out.println();
         System.out.println("  1 2 3");
@@ -241,6 +283,11 @@ public class CMPE343Project1 {
         System.out.println();
     }
 
+    /**
+     * Check tic-tac-toe table for winner and return if there is a winner
+     * @param table Tic-tac-toe game board
+     * @return 'X' if X wins, 'O' if O wins, '-' if there is no winner
+     */
     public static char CheckWinner(char[][] table) {
         for (int i = 0; i < 3; i++) {
             if (table[i][0] == 'X' && table[i][1] == 'X' && table[i][2] == 'X')
@@ -265,6 +312,11 @@ public class CMPE343Project1 {
         return '-';
     }
 
+    /**
+     * Prompt user to make move on the tic-tac-toe table
+     * @param table Tic-tac-toe game board
+     * @param turn Tells the function which player should make the move
+     */
     public static void MakeMove(char[][] table, boolean turn) {
         while (true) {
             System.out.print((turn ? 'X' : 'O') + "'s turn: ");
@@ -295,6 +347,9 @@ public class CMPE343Project1 {
         }
     }
 
+    /**
+     * Main function for the tic-tac-toe game
+     */
     public static void D() {
         char[][] table = new char[3][3];
         boolean turn = true;
