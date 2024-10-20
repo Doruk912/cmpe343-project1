@@ -83,10 +83,10 @@ public class CMPE343Project1 {
      */
     public static void textEncryptionDecryptionMenu(){
         clearConsole();
-        String input;
         while(true){
             System.out.println("""
-                    Text Encryption/Decryption
+                    Selected option: [C] Text Encryption/Decryption
+                    
                     Please select an option:
                     [A] Text Encryption,
                     [B] Text Decryption,
@@ -132,7 +132,8 @@ public class CMPE343Project1 {
                 encryptedMessage.append(c);
             }
         }
-        System.out.println("Encrypted Message: " + encryptedMessage  + "\n");
+        System.out.println("Encrypted Message: " + encryptedMessage);
+        ReturnToMenu();
     }
 
     /**
@@ -158,7 +159,8 @@ public class CMPE343Project1 {
                 decryptedMessage.append(c);
             }
         }
-        System.out.println("Decrypted Message: " + decryptedMessage + "\n");
+        System.out.println("Decrypted Message: " + decryptedMessage);
+        ReturnToMenu();
     }
 
     /**
@@ -249,7 +251,7 @@ public class CMPE343Project1 {
 
         double[] arr = new double[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = SafeDoubleInput(i + ": ");
+            arr[i] = SafeDoubleInput(i + 1 + ": ");
             arithmetic += arr[i];
             geometric *= arr[i];
         }
