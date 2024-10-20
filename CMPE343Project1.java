@@ -125,9 +125,9 @@ public class CMPE343Project1 {
         StringBuilder encryptedMessage = new StringBuilder();
         for(char c : message.toCharArray()){
             if(Character.isUpperCase(c)){
-                encryptedMessage.append((char) ((c + key - 65) % 26 + 65));
+                encryptedMessage.append((char) ((c + key - 65 + 26) % 26 + 65));
             } else if(Character.isLowerCase(c)){
-                encryptedMessage.append((char) ((c + key - 97) % 26 + 97));
+                encryptedMessage.append((char) ((c + key - 97 + 26) % 26 + 97));
             } else {
                 encryptedMessage.append(c);
             }
