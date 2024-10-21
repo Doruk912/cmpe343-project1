@@ -202,10 +202,15 @@ public class CMPE343Project1 {
      */
     public static int SafeIntInput(String prompt) {
         while (true) {
+            System.out.print(prompt);
+            String response = scanner.nextLine();
+            if (response.isBlank()) {
+                System.out.println("Empty input. Please try again.");
+                continue;
+            }
             try {
-                System.out.print(prompt);
-                return new Scanner(System.in).nextInt();
-            } catch (InputMismatchException ex) {
+                return Integer.parseInt(response);
+            } catch (NumberFormatException ex) {
                 System.out.println("Wrong data type, try again");
             }
         }
@@ -218,10 +223,15 @@ public class CMPE343Project1 {
      */
     public static double SafeDoubleInput(String prompt) {
         while (true) {
+            System.out.print(prompt);
+            String response = scanner.nextLine();
+            if (response.isBlank()) {
+                System.out.println("Empty input. Please try again.");
+                continue;
+            }
             try {
-                System.out.print(prompt);
-                return new Scanner(System.in).nextDouble();
-            } catch (InputMismatchException ex) {
+                return Double.parseDouble(response);
+            } catch (NumberFormatException ex) {
                 System.out.println("Wrong data type, try again");
             }
         }
