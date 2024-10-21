@@ -113,11 +113,9 @@ public class CMPE343Project1 {
      * Encrypts text
      */
     public static void textEncryption(){
-        System.out.println("Enter Key: ");
-        int key = Integer.valueOf(scanner.nextLine());
+        int key = SafeIntInput("Enter Key: ");
         while(key <= -27 || key >= 27){
-            System.out.println("Invalid key. Please enter a key between -26 and 26.");
-            key = Integer.valueOf(scanner.nextLine());
+            key = SafeIntInput("Invalid key. Please enter a key between -26 and 26.\n");
         }
         System.out.println("Enter Message: ");
         String message = scanner.nextLine();
@@ -140,11 +138,9 @@ public class CMPE343Project1 {
      * Decrypts text
      */
     public static void textDecryption(){
-        System.out.println("Enter Key: ");
-        int key = Integer.valueOf(scanner.nextLine());
+        int key = SafeIntInput("Enter Key: ");
         while(key <= -27 || key >= 27){
-            System.out.println("Invalid key. Please enter a key between -26 and 26.");
-            key = Integer.valueOf(scanner.nextLine());
+            key = SafeIntInput("Invalid key. Please enter a key between -26 and 26.\n");
         }
         System.out.println("Enter Encrypted Message: ");
         String message = scanner.nextLine();
