@@ -59,7 +59,7 @@ public class CMPE343Project1 {
                     A();
                     break;
                 case "B":
-                    System.out.println("Matrix Operations\n");
+                    matrixOperationsMenu();
                     break;
                 case "C":
                     textEncryptionDecryptionMenu();
@@ -92,7 +92,7 @@ public class CMPE343Project1 {
                     [C] Return To Main Menu.\s
                     """);
             String textInput = scanner.nextLine();
-            switch (textInput){
+            switch (textInput.toUpperCase()){
                 case "A":
                     textEncryption();
                     break;
@@ -185,7 +185,7 @@ public class CMPE343Project1 {
      * Waits ENTER key from the user and clears the screen which prepares fresh start for the main loop
      */
     public static void ReturnToMenu() {
-        System.out.println("\nPress ENTER to return to main menu");
+        System.out.println("\nPress ENTER to return to menu");
         try {
             System.in.read();
         } catch (IOException ex) {
@@ -208,6 +208,32 @@ public class CMPE343Project1 {
                 continue;
             }
             try {
+                return Integer.parseInt(response);
+            } catch (NumberFormatException ex) {
+                System.out.println("Wrong data type, try again");
+            }
+        }
+    }
+
+    /**
+     * Prompts positive integer input until no errors are encountered
+     * @param prompt Prompt which is going to be printed on the screen
+     * @return Positive integer value from the user
+     */
+    public static int safePositiveIntInput(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String response = scanner.nextLine();
+            if (response.isBlank()) {
+                System.out.println("Empty input. Please try again.");
+                continue;
+            }
+            try {
+                int num = Integer.parseInt(response);
+                if(num <= 0){
+                    System.out.println("Number should be greater than 0. Please try again.");
+                    continue;
+                }
                 return Integer.parseInt(response);
             } catch (NumberFormatException ex) {
                 System.out.println("Wrong data type, try again");
@@ -390,5 +416,115 @@ public class CMPE343Project1 {
         PrintTable(table);
         System.out.println("draw");
         ReturnToMenu();
+    }
+
+    /**
+     * Display the menu for matrix operations
+     */
+    public static void matrixOperationsMenu(){
+        clearConsole();
+        while(true){
+            System.out.println("""
+                    Selected option: [B] Matrix Operations
+                    
+                    Please select an option:
+                    [A] Transpose of a Matrix,
+                    [B] Inverse of a Matrix,
+                    [C] Matrix Multiplication,
+                    [D] Element-wise Multiplication,
+                    [E] Return To Main Menu.\s
+                    """);
+            String input = scanner.nextLine();
+            switch (input.toUpperCase()){
+                case "A":
+                    transpose();
+                    break;
+                case "B":
+                    inverse();
+                    break;
+                case "C":
+                    multiplication();
+                    break;
+                case "D":
+                    elementWiseMultiplication();
+                    break;
+                case "E":
+                    return;
+                default:
+                    System.out.println("Invalid input. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Transpose of a matrix
+     */
+    public static void transpose(){
+        System.out.println("Enter the number of rows and columns of the matrix: ");
+        int rows = safePositiveIntInput("Rows: ");
+        int columns = safePositiveIntInput("Columns: ");
+
+        int[][] matrix = new int[rows][columns];
+        System.out.println("Enter the elements of the matrix: ");
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                matrix[i][j] = SafeIntInput("Element at [" + (i + 1) + "][" + (j + 1) + "]: ");
+            }
+        }
+
+        System.out.println("\nOriginal Matrix: ");
+        printMatrix(matrix);
+
+        int[][] transposedMatrix = new int[columns][rows];
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                transposedMatrix[j][i] = matrix[i][j];
+            }
+        }
+
+        System.out.println("\nTransposed Matrix: ");
+        printMatrix(transposedMatrix);
+
+        ReturnToMenu();
+    }
+
+    /**
+     * Inverse of a matrix
+     */
+    public static void inverse(){
+        System.out.println("Inverse");
+        ReturnToMenu();
+    }
+
+    /**
+     * Matrix multiplication
+     */
+    public static void multiplication(){
+        System.out.println("Multiplication");
+        ReturnToMenu();
+    }
+
+    /**
+     * Element-wise multiplication
+     */
+    public static void elementWiseMultiplication(){
+        System.out.println("Element-wise Multiplication");
+        ReturnToMenu();
+    }
+
+    /**
+     * Prints the matrix
+     * @param matrix Integer matrix to be printed
+     */
+    public static void printMatrix(int[][] matrix){
+        //This method can be improved. It is just a simple print method for now.
+        //Looks weird when there are elements with different number of digits
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
