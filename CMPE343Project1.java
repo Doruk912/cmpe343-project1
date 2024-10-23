@@ -263,6 +263,19 @@ public class CMPE343Project1 {
     }
 
     /**
+     * Recursive calculation of harmonic mean
+     * @param size
+     * @param arr
+     * @param sumReciprocal
+     * @return
+     */
+    public static double harmonicMeanRecursive (int size,double[] arr, double sumReciprocal){
+        if (size == 0) {
+            return arr.length / sumReciprocal;
+        }
+        return harmonicMeanRecursive(size-1,arr,sumReciprocal+1/ arr[arr.length-size]);
+    }
+    /**
      * Statistical information of an array
      */
     public static void A() {
@@ -292,10 +305,11 @@ public class CMPE343Project1 {
         double median = (size % 2 == 0) ? (arr[size / 2] + arr[size / 2 - 1]) / 2.0 : arr[size / 2];
         arithmetic /= size;
         geometric = Math.pow(geometric, 1.0 / size);
-
+        double harmonic = harmonicMeanRecursive(size,arr,sumReciprocal);
         System.out.println("\nMedian: " + median);
         System.out.println("Arithmetic Mean: " + arithmetic);
         System.out.println("Geometric Mean: " + geometric);
+        System.out.println("Harmonic Mean: " + harmonic);
 
         ReturnToMenu();
     }
