@@ -292,6 +292,7 @@ public class CMPE343Project1 {
 
         double arithmetic = 0;
         double geometric = 1;
+        double sumReciprocal = 0;
 
         double[] arr = new double[size];
         for (int i = 0; i < size; i++) {
