@@ -524,7 +524,48 @@ public class CMPE343Project1 {
      * Element-wise multiplication
      */
     public static void elementWiseMultiplication(){
-        System.out.println("Element-wise Multiplication");
+        System.out.println("Enter the number of rows and columns of the matrices: ");
+        int rows = safePositiveIntInput("Rows: ");
+        int columns = safePositiveIntInput("Columns: ");
+
+        int[][] matrix1 = new int[rows][columns];
+        System.out.println("Enter the elements of the first matrix: ");
+
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<columns; j++)
+            {
+                matrix1[i][j] = SafeIntInput("Element at [" + (i+1) + "][" + (j+1) + "]: ");
+            }
+        }
+
+        System.out.println("\nYour First Matrix: ");
+        printMatrix(matrix1);
+
+        int[][] matrix2 = new int[rows][columns];
+        System.out.println("Enter the elements of the second matrix: ");
+        for(int i=0; i<rows; i++)
+        {
+            for(int j=0; j<columns; j++)
+            {
+                matrix2[i][j] = SafeIntInput("Element at [" + (i+1) + "][" + (j+1) + "]: ");
+            }
+        }
+
+        System.out.println("\nYour Second Matrix: ");
+        printMatrix(matrix2);
+
+        int[][] result = new int[rows][columns];
+        for (int i=0; i<rows; i++)
+        {
+            for (int j=0; j<columns; j++) 
+            {
+                result[i][j] = matrix1[i][j] * matrix2[i][j];
+            }
+        }
+
+        System.out.println("Result of Element-wise Multiplication: ");
+        printMatrix(result);
         ReturnToMenu();
     }
 
