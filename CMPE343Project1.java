@@ -507,10 +507,125 @@ public class CMPE343Project1 {
     /**
      * Inverse of a matrix
      */
-    public static void inverse(){
-        System.out.println("Inverse");
+    public static void inverse() {
+    System.out.println("Enter the size of the square matrix (n x n): ");
+    int size = safePositiveIntInput("Size: ");  
+
+    if (size <= 1) {
+        System.out.println("Matrix should be at least 2x2.");
         ReturnToMenu();
+        return;
     }
+
+    double[][] matrix = new double[size][size];  
+    System.out.println("Enter the elements of the matrix: ");
+    for (int i = 0; i < size; i++) {  
+        for (int j = 0; j < size; j++) {  
+            matrix[i][j] = SafeDoubleInput("Element at [" + (i + 1) + "][" + (j + 1) + "]: ");
+        }
+    }
+
+    System.out.println("\nOriginal Matrix: ");
+    printDoubleMatrix(matrix);
+
+    if (!isInvertible(matrix, size)) {
+        System.out.println("\nThe matrix is non-invertible (determinant is 0).");
+        ReturnToMenu();
+        return;
+    }
+
+    double[][] inverseMatrix = gaussianEliminationInverse(matrix, size);
+    
+    System.out.println("\nInverse Matrix: ");
+    printDoubleMatrix(inverseMatrix);
+    
+    ReturnToMenu();
+}
+
+public static double[][] gaussianEliminationInverse(double[][] matrix, int size) {
+    double[][] identityMatrix = new double[size][size];
+    for (int i = 0; i < size; i++) {  
+        identityMatrix[i][i] = 1;
+    }
+
+    double[][] augmentedMatrix = new double[size][2 * size];
+    for (int i = 0; i < size; i++) {  
+        for (int j = 0; j < size; j++) { 
+            augmentedMatrix[i][j] = matrix[i][j];
+            augmentedMatrix[i][j + size] = identityMatrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < size; i++) { 
+        if (augmentedMatrix[i][i] == 0) {
+            for (int k = i + 1; k < size; k++) {  
+                if (augmentedMatrix[k][i] != 0) {
+                    double[] temp = augmentedMatrix[i];
+                    augmentedMatrix[i] = augmentedMatrix[k];
+                    augmentedMatrix[k] = temp;
+                    break;
+                }
+            }
+        }
+
+        double diagonalValue = augmentedMatrix[i][i];
+        for (int j = 0; j < 2 * size; j++) {  
+            augmentedMatrix[i][j] /= diagonalValue;
+        }
+
+        for (int k = 0; k < size; k++) {
+            if (k != i) {
+                double factor = augmentedMatrix[k][i];
+                for (int j = 0; j < 2 * size; j++) { 
+                    augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
+                }
+            }
+        }
+    }
+
+    double[][] inverseMatrix = new double[size][size];
+    for (int i = 0; i < size; i++) {  
+        for (int j = 0; j < size; j++) {  
+            inverseMatrix[i][j] = augmentedMatrix[i][j + size];
+        }
+    }
+
+    return inverseMatrix;
+}
+
+public static boolean isInvertible(double[][] matrix, int size) {  
+    double determinant = computeDeterminant(matrix, size);
+    return determinant != 0;
+}
+
+public static double computeDeterminant(double[][] matrix, int size) {  
+    if (size == 2) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    double determinant = 0;
+    for (int i = 0; i < size; i++) {  
+        double[][] subMatrix = new double[size - 1][size - 1];
+        for (int j = 1; j < size; j++) {  
+            int subCol = 0;
+            for (int k = 0; k < size; k++) {  
+                if (k == i) continue;
+                subMatrix[j - 1][subCol++] = matrix[j][k];
+            }
+        }
+        determinant += Math.pow(-1, i) * matrix[0][i] * computeDeterminant(subMatrix, size - 1);
+    }
+    return determinant;
+}
+public static void printDoubleMatrix(double[][] matrix) {
+    for (int i = 0; i < matrix.length; i++) { 
+        for (int j = 0; j < matrix[i].length; j++) {  
+            System.out.print(matrix[i][j] + " ");  
+        }
+        System.out.println();  
+    }
+}
+
 
     /**
      * Matrix multiplication
