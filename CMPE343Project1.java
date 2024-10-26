@@ -264,10 +264,10 @@ public class CMPE343Project1 {
 
     /**
      * Recursive calculation of harmonic mean
-     * @param size
-     * @param arr
-     * @param sumReciprocal
-     * @return
+     * @param size The size of the array
+     * @param arr The array itself that we are calculating the harmonic mean of
+     * @param sumReciprocal To calculate the harmonic mean we need to divide the total count of the number by the reciprocals of the numbers themselves summed
+     * @return It recursi
      */
     public static double harmonicMeanRecursive (int size,double[] arr, double sumReciprocal){
         if (size == 0) {
@@ -517,6 +517,48 @@ public class CMPE343Project1 {
      */
     public static void multiplication(){
         System.out.println("Multiplication");
+        System.out.println("Enter the number of rows and columns of the first matrix: ");
+        int rows1 = safePositiveIntInput("Rows: ");
+        int columns1 = safePositiveIntInput("Columns: ");
+
+        int[][] matrix1 = new int[rows1][columns1];
+        System.out.println("Enter the elements of the first matrix: ");
+
+        for(int i=0; i<rows1; i++)
+        {
+            for(int j=0; j<columns1; j++)
+            {
+                matrix1[i][j] = SafeIntInput("Element at [" + (i+1) + "][" + (j+1) + "]: ");
+            }
+        }
+        printMatrix(matrix1);
+
+
+        System.out.println("Enter the number of rows and columns of the second matrix: ");
+        int rows2 = safePositiveIntInput("Rows: ");
+        while(rows2 != columns1){
+            System.out.println("Rows of the second matrix can't be different from the columns of the first matrix.");
+            rows2 = safePositiveIntInput("Rows: ");
+        }
+        int columns2 = safePositiveIntInput("Columns: ");
+
+        int[][] matrix2 = new int[rows2][columns2];
+        System.out.println("Enter the elements of the second matrix: ");
+
+        for(int i=0; i<rows2; i++)
+        {
+            for(int j=0; j<columns2; j++)
+            {
+                matrix2[i][j] = SafeIntInput("Element at [" + (i+1) + "][" + (j+1) + "]: ");
+            }
+        }
+
+        System.out.println("\nYour Second Matrix: ");
+        printMatrix(matrix2);
+
+/*        int[][] matrix3 = new int [rows1][columns2];
+        for(int )*/
+
         ReturnToMenu();
     }
 
