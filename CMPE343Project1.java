@@ -264,16 +264,16 @@ public class CMPE343Project1 {
 
     /**
      * Recursive calculation of harmonic mean
-     * @param size The size of the array
+     * @param size The size of the array. Is used to monitor the remaining elements of the array to process. It is used as the condition to stop the recursion.
      * @param arr The array itself that we are calculating the harmonic mean of
-     * @param sumReciprocal To calculate the harmonic mean we need to divide the total count of the number by the reciprocals of the numbers themselves summed
-     * @return It recursi
+     * @param reciprocalSum To calculate the harmonic mean we need to divide the total count of the number by the reciprocals of the numbers themselves summed
+     * @return Returns the results of the method to the method itself (recursion) until the size returned is equal to 0 which then returns the harmonic mean itself.
      */
-    public static double harmonicMeanRecursive (int size,double[] arr, double sumReciprocal){
+    public static double harmonicMeanRecursive (int size,double[] arr, double reciprocalSum){
         if (size == 0) {
-            return arr.length / sumReciprocal;
+            return arr.length / reciprocalSum;
         }
-        return harmonicMeanRecursive(size-1,arr,sumReciprocal+1/ arr[arr.length-size]);
+        return harmonicMeanRecursive(size-1,arr,reciprocalSum+1/ arr[arr.length-size]);
     }
     /**
      * Statistical information of an array
@@ -292,7 +292,7 @@ public class CMPE343Project1 {
 
         double arithmetic = 0;
         double geometric = 1;
-        double sumReciprocal = 0;
+        double reciprocalSum = 0;
 
         double[] arr = new double[size];
         for (int i = 0; i < size; i++) {
@@ -306,7 +306,7 @@ public class CMPE343Project1 {
         double median = (size % 2 == 0) ? (arr[size / 2] + arr[size / 2 - 1]) / 2.0 : arr[size / 2];
         arithmetic /= size;
         geometric = Math.pow(geometric, 1.0 / size);
-        double harmonic = harmonicMeanRecursive(size,arr,sumReciprocal);
+        double harmonic = harmonicMeanRecursive(size,arr, reciprocalSum);
         System.out.println("\nMedian: " + median);
         System.out.println("Arithmetic Mean: " + arithmetic);
         System.out.println("Geometric Mean: " + geometric);
@@ -509,7 +509,7 @@ public class CMPE343Project1 {
      */
     public static void inverse() {
     System.out.println("Enter the size of the square matrix (n x n): ");
-    int size = safePositiveIntInput("Size: ");  
+    int size = safePositiveIntInput("Size: ");
 
     if (size <= 1) {
         System.out.println("Matrix should be at least 2x2.");
@@ -517,10 +517,10 @@ public class CMPE343Project1 {
         return;
     }
 
-    double[][] matrix = new double[size][size];  
+    double[][] matrix = new double[size][size];
     System.out.println("Enter the elements of the matrix: ");
-    for (int i = 0; i < size; i++) {  
-        for (int j = 0; j < size; j++) {  
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             matrix[i][j] = SafeDoubleInput("Element at [" + (i + 1) + "][" + (j + 1) + "]: ");
         }
     }
@@ -535,30 +535,30 @@ public class CMPE343Project1 {
     }
 
     double[][] inverseMatrix = gaussianEliminationInverse(matrix, size);
-    
+
     System.out.println("\nInverse Matrix: ");
     printDoubleMatrix(inverseMatrix);
-    
+
     ReturnToMenu();
 }
 
 public static double[][] gaussianEliminationInverse(double[][] matrix, int size) {
     double[][] identityMatrix = new double[size][size];
-    for (int i = 0; i < size; i++) {  
+    for (int i = 0; i < size; i++) {
         identityMatrix[i][i] = 1;
     }
 
     double[][] augmentedMatrix = new double[size][2 * size];
-    for (int i = 0; i < size; i++) {  
-        for (int j = 0; j < size; j++) { 
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             augmentedMatrix[i][j] = matrix[i][j];
             augmentedMatrix[i][j + size] = identityMatrix[i][j];
         }
     }
 
-    for (int i = 0; i < size; i++) { 
+    for (int i = 0; i < size; i++) {
         if (augmentedMatrix[i][i] == 0) {
-            for (int k = i + 1; k < size; k++) {  
+            for (int k = i + 1; k < size; k++) {
                 if (augmentedMatrix[k][i] != 0) {
                     double[] temp = augmentedMatrix[i];
                     augmentedMatrix[i] = augmentedMatrix[k];
@@ -569,14 +569,14 @@ public static double[][] gaussianEliminationInverse(double[][] matrix, int size)
         }
 
         double diagonalValue = augmentedMatrix[i][i];
-        for (int j = 0; j < 2 * size; j++) {  
+        for (int j = 0; j < 2 * size; j++) {
             augmentedMatrix[i][j] /= diagonalValue;
         }
 
         for (int k = 0; k < size; k++) {
             if (k != i) {
                 double factor = augmentedMatrix[k][i];
-                for (int j = 0; j < 2 * size; j++) { 
+                for (int j = 0; j < 2 * size; j++) {
                     augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
                 }
             }
@@ -584,8 +584,8 @@ public static double[][] gaussianEliminationInverse(double[][] matrix, int size)
     }
 
     double[][] inverseMatrix = new double[size][size];
-    for (int i = 0; i < size; i++) {  
-        for (int j = 0; j < size; j++) {  
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             inverseMatrix[i][j] = augmentedMatrix[i][j + size];
         }
     }
@@ -593,22 +593,22 @@ public static double[][] gaussianEliminationInverse(double[][] matrix, int size)
     return inverseMatrix;
 }
 
-public static boolean isInvertible(double[][] matrix, int size) {  
+public static boolean isInvertible(double[][] matrix, int size) {
     double determinant = computeDeterminant(matrix, size);
     return determinant != 0;
 }
 
-public static double computeDeterminant(double[][] matrix, int size) {  
+public static double computeDeterminant(double[][] matrix, int size) {
     if (size == 2) {
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
     }
 
     double determinant = 0;
-    for (int i = 0; i < size; i++) {  
+    for (int i = 0; i < size; i++) {
         double[][] subMatrix = new double[size - 1][size - 1];
-        for (int j = 1; j < size; j++) {  
+        for (int j = 1; j < size; j++) {
             int subCol = 0;
-            for (int k = 0; k < size; k++) {  
+            for (int k = 0; k < size; k++) {
                 if (k == i) continue;
                 subMatrix[j - 1][subCol++] = matrix[j][k];
             }
@@ -618,11 +618,11 @@ public static double computeDeterminant(double[][] matrix, int size) {
     return determinant;
 }
 public static void printDoubleMatrix(double[][] matrix) {
-    for (int i = 0; i < matrix.length; i++) { 
-        for (int j = 0; j < matrix[i].length; j++) {  
-            System.out.print(matrix[i][j] + " ");  
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[i].length; j++) {
+            System.out.print(matrix[i][j] + " ");
         }
-        System.out.println();  
+        System.out.println();
     }
 }
 
