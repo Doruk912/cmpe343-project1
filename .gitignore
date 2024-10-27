@@ -61,4 +61,5 @@ ehthumbs.db
 Thumbs.db
 /out/
 
-*.iml.idea
+*.iml
+*.idea
