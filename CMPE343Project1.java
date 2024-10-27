@@ -671,8 +671,19 @@ public static void printDoubleMatrix(double[][] matrix) {
         System.out.println("\nYour Second Matrix: ");
         printMatrix(matrix2);
 
-/*        int[][] matrix3 = new int [rows1][columns2];
-        for(int )*/
+        int[][] matrix3 = new int [rows1][columns2];
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns2; j++) {
+                int sum = 0;
+                for (int k = 0; k < columns1; k++) {
+                    sum += matrix1[i][k] * matrix2[k][j];
+                }
+                matrix3[i][j] = sum;
+            }
+        }
+
+        System.out.println("\nThe result of the multiplication: ");
+        printMatrix(matrix3);
 
         ReturnToMenu();
     }
