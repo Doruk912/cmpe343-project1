@@ -742,13 +742,16 @@ public static void printDoubleMatrix(double[][] matrix) {
      * @param matrix Integer matrix to be printed
      */
     public static void printMatrix(int[][] matrix){
-        //This method can be improved. It is just a simple print method for now.
-        //Looks weird when there are elements with different number of digits
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
-                System.out.print(matrix[i][j] + " ");
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        String str = "|\t";
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                str += matrix[i][j] + "\t";
             }
-            System.out.println();
+            System.out.println(str + "|");
+            str = "|\t";
         }
     }
 }
