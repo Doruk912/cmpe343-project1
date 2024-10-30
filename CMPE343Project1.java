@@ -542,6 +542,13 @@ public class CMPE343Project1 {
     ReturnToMenu();
 }
 
+
+/**
+ * Gauss elimination inverse on matrix
+ * @param matrix Matrix to invert
+ * @param size Row or column length of the matrix
+ * @return Resulting matrix
+ */
 public static double[][] gaussianEliminationInverse(double[][] matrix, int size) {
     double[][] identityMatrix = new double[size][size];
     for (int i = 0; i < size; i++) {
@@ -593,11 +600,23 @@ public static double[][] gaussianEliminationInverse(double[][] matrix, int size)
     return inverseMatrix;
 }
 
+/**
+ * Check if a matrix is invertible
+ * @param matrix Matrix to invert
+ * @param size Row or column length of the matrix
+ * @return Returns true if the matrix is invertible
+ */
 public static boolean isInvertible(double[][] matrix, int size) {
     double determinant = computeDeterminant(matrix, size);
     return determinant != 0;
 }
 
+/**
+ * Compute determinant
+ * @param matrix Matrix to compute
+ * @param size Row or column length of the matrix
+ * @return Determinant of the matrix
+ */
 public static double computeDeterminant(double[][] matrix, int size) {
     if (size == 2) {
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
@@ -617,6 +636,11 @@ public static double computeDeterminant(double[][] matrix, int size) {
     }
     return determinant;
 }
+
+/**
+ * Print the double matrix
+ * @param matrix Matrix to print
+ */
 public static void printDoubleMatrix(double[][] matrix) {
     for (int i = 0; i < matrix.length; i++) {
         for (int j = 0; j < matrix[i].length; j++) {
