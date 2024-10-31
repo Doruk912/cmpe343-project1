@@ -81,7 +81,7 @@ public class CMPE343Project1 {
      * Displays the menu for text encryption and decryption
      */
     public static void textEncryptionDecryptionMenu(){
-        clearConsole();
+        ClearScreen();
         while(true){
             System.out.println("""
                     Selected option: [C] Text Encryption/Decryption
@@ -100,6 +100,7 @@ public class CMPE343Project1 {
                     textDecryption();
                     break;
                 case "C":
+                    ClearScreen();
                     return;
                 default:
                     System.out.println("Invalid input. Please try again.");
@@ -433,7 +434,7 @@ public class CMPE343Project1 {
      * Display the menu for matrix operations
      */
     public static void matrixOperationsMenu(){
-        clearConsole();
+        ClearScreen();
         while(true){
             System.out.println("""
                     Selected option: [B] Matrix Operations
@@ -460,6 +461,7 @@ public class CMPE343Project1 {
                     elementWiseMultiplication();
                     break;
                 case "E":
+                    ClearScreen();
                     return;
                 default:
                     System.out.println("Invalid input. Please try again.");
