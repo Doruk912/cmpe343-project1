@@ -186,11 +186,7 @@ public class CMPE343Project1 {
      */
     public static void ReturnToMenu() {
         System.out.println("\nPress ENTER to return to menu");
-        try {
-            System.in.read();
-        } catch (IOException ex) {
-            System.out.println("Error");
-        }
+        scanner.nextLine();
         ClearScreen();
     }
 
